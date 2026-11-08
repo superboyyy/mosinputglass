@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="module_description">给微信输入法和豆包输入法的键盘套上系统玻璃材质（MagicOS 11、HyperOS 4 液态玻璃，ColorOS 17 毛玻璃），按键配色对照 iOS 26</string>
+    <string name="module_description">让微信输入法 / 豆包输入法用上系统自带玻璃材质</string>
 </resources>
