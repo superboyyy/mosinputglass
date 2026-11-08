@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.superboyyy.mosinputglass" android:versionCode="42" android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="31" android:targetSdkVersion="35"/>
+    <!-- 检测有没有装微信输入法、豆包输入法；读微信输入法自带的 WE 字体 -->
+    <queries><package android:name="com.tencent.wetype"/><package android:name="com.bytedance.android.doubaoime"/><package android:name="com.hihonor.search"/></queries>
+    <!-- libxposed：模块元数据在 META-INF/xposed/（java_init.list / module.prop / scope.list），这里只需要描述 -->
+    <application android:name=".App" android:label="MOS液态输入" android:hasCode="true"
+        android:description="@string/module_description"
+        android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@android:style/Theme.DeviceDefault.DayNight">
+        <activity android:name=".SettingsActivity" android:exported="true"
+            android:label="MOS液态输入"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS"/>
+            </intent-filter>
+        </activity>
+        <!-- LSPosed 通过它把 XposedService 发给设置界面（libxposed service） -->
+        <provider android:name="io.github.libxposed.service.XposedProvider"
+            android:authorities="com.superboyyy.mosinputglass.XposedService"
+            android:directBootAware="true"
+            android:exported="true"/>
+    </application>
+</manifest>

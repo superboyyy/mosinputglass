@@ -1,0 +1,22 @@
+MOS液态输入
+Copyright 2026 熠寻（酷安@熠寻）
+
+本项目以 Apache License 2.0 发布，见 LICENSE。
+
+本项目包含以下第三方代码（均为 Apache License 2.0，未修改）：
+- libxposed/service（https://github.com/libxposed/service）：lib/java/io/github/libxposed/service、lib/aidl
+- libxposed/api（https://github.com/libxposed/api）：stubs/io/github/libxposed/api（只用于编译，不打进 APK）
+详见 lib/NOTICE.md。
+
+应用图标（icon/source.webp 及 res/drawable-*/ic_launcher_*.png）由作者使用 AI 工具生成。
+
+本项目与荣耀（HONOR）、小米（Xiaomi）、OPPO、腾讯、字节跳动均无关联。
+MagicOS、荣耀、HONOR 是荣耀终端有限公司的商标；微信输入法、豆包输入法分别是其所有者的商标或产品名称。
+模块内置的荣耀圆环标识（res/drawable/ic_honor_ring.xml）是重新绘制的矢量图形，该标识是荣耀终端有限公司的商标，
+仅用于在荣耀手机的键盘上显示，不代表荣耀对本项目的认可。
+小米、Xiaomi、HyperOS 是小米集团的商标。模块内置的小米标识（Main.xiaomiLogo）是用代码重新绘制的单色图形，
+仅用于在小米手机的键盘上显示，不代表小米对本项目的认可。
+OPPO、一加、OnePlus、realme、ColorOS 是其各自所有者的商标。模块内置的 OPPO 字标（Main.oppoLogo）同样是用代码重新绘制的单色图形，
+仅用于在 OPPO 系手机的键盘上显示，不代表 OPPO 对本项目的认可。
+HyperOS 上的玻璃参数是在用户手机上运行时，从系统自带的 /system_ext/framework/miuix.jar 里读取的，模块不包含其代码。
+模块不包含第三方的字体或代码：微信输入法的英文字体是在用户手机上运行时，从用户已安装的微信输入法里读取的。

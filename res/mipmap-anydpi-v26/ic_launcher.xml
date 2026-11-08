@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 背景透明、前景是图案：MagicOS 桌面会把图案直接放在液态玻璃底板上 -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_clear"/>
+    <foreground android:drawable="@drawable/ic_launcher_art"/>
+    <monochrome android:drawable="@drawable/ic_launcher_mono"/>
+</adaptive-icon>

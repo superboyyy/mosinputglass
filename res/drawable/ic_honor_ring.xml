@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 荣耀圆环标识（重新绘制的矢量）：外圆半径 50，内圆半径 30.9（0.618），右上和左下各一道往外收窄的斜切口 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp" android:height="96dp" android:viewportWidth="100" android:viewportHeight="100">
+    <path android:fillColor="#FF000000" android:pathData="M82.89,12.34 A50,50 0 0,0 12.60,83.19 L23.02,65.06 A30.9,30.9 0 0,1 64.86,22.91 Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M17.11,87.66 A50,50 0 0,0 87.40,16.81 L76.98,34.94 A30.9,30.9 0 0,1 35.14,77.09 Z"/>
+</vector>
