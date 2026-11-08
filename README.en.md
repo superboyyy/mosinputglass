@@ -95,8 +95,10 @@ The settings page is in Chinese only.
 | Main card | Master switch, restart IME, test field |
 | IMEs | Separate switches for WeChat IME and Doubao IME |
 | Style | iOS style (default), high readability, more transparent |
-| Common | Background opacity, keyboard corner radius, key corner radius, iOS key colors, brand logo; on Honor also the navigation-bar voice key and Honor keyboard haptics |
-| Advanced | Blur, saturation, tint, key brightness, Doubao using WeChat's Latin font, pinyin row position, glass texture (refraction, thickness, depth, dispersion, edge highlight); on Honor also "fill in home-screen search" |
+| Common | Background opacity, keyboard corner radius, key corner radius, iOS key colors, brand logo, navigation-bar voice key, Honor keyboard haptics |
+| Advanced | Blur, saturation, light/dark tint, remove the IME's own background, key opacity and brightness, Doubao using WeChat's Latin font, pinyin row position, glass texture (refraction, thickness, depth, dispersion, edge highlight), fill in home-screen search |
+
+The settings page only shows the options that work on your phone; see "How do the three systems differ?" below.
 
 ## FAQ
 
@@ -118,14 +120,17 @@ Tap "restart IME" in the settings page, then tap the text field again.
 <details>
 <summary><b>How do the three systems differ?</b></summary>
 
-| | MagicOS 11 | HyperOS 4 | ColorOS 17 |
+| Setting | MagicOS 11 | HyperOS 4 | ColorOS 17 |
 |---|---|---|---|
 | Keyboard material | Liquid glass | Liquid glass | Frosted glass (no refraction) |
-| Blur | ✅ | — | ✅ |
-| Background opacity, tint | ✅ | — (set by system presets) | ✅ |
-| Glass texture | ✅ | — | — |
-| Key colors, corner radii, logo, Doubao font | ✅ | ✅ | ✅ |
-| Haptics, navigation-bar voice key, home-screen search | ✅ | — | — |
+| Background opacity, tint, blur | ✅ | — (set by system presets) | ✅ |
+| Saturation | ✅ | — | — |
+| Refraction, thickness, depth, dispersion | ✅ | — | — |
+| Edge highlight | ✅ | ✅ | ✅ |
+| Corner radii, key colors, key brightness, logo, Doubao font, pinyin row position | ✅ | ✅ | ✅ |
+| Navigation-bar voice key, haptics, home-screen search | ✅ | — | — |
+
+Options marked "—" are hidden from the settings page on that system.
 
 On ColorOS, when the system turns window blur off (battery saver, for example), the keyboard falls back to a translucent tint.
 

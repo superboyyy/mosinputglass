@@ -43,6 +43,29 @@ final class Config {
     static final String PKG_DOUBAO = "com.bytedance.android.doubaoime";
     static final String VOICE = "voice";            // 导航栏右侧语音按钮（按住/点一下 = 按住空格说话）
     /** 小米 / Redmi / POCO 机型：左上角 logo 换成小米标识而不是荣耀圆环。 */
+    /** 键盘用哪种玻璃：和 Main 里的判断一致（荣耀液态玻璃 > HyperOS 液态玻璃 > HyperOS 背景模糊 > 安卓区域模糊）。 */
+    static final int GLASS_HONOR = 0, GLASS_HYPER = 1, GLASS_HYPER_BLUR = 2, GLASS_REGION = 3;
+    private static Integer glassKind;
+
+    static int glassKind() {
+        if (glassKind != null) return glassKind;
+        int k = GLASS_REGION;
+        try {
+            Class.forName("com.hihonor.android.graphics.material.HnMaterialManager");
+            k = GLASS_HONOR;
+        } catch (Throwable t) {
+            try {
+                android.view.View.class.getMethod("setMiBackgroundBlurMode", int.class);
+                k = GLASS_HYPER_BLUR;
+                android.view.View.class.getMethod("setMiGlass", float[].class);
+                if (new java.io.File("/system_ext/framework/miuix.jar").exists()) k = GLASS_HYPER;
+            } catch (Throwable ignored) {
+            }
+        }
+        glassKind = k;
+        return k;
+    }
+
     /** OPPO 系手机（OPPO、一加、realme，ColorOS / OxygenOS / realme UI）：左上角显示 OPPO 标识。 */
     static boolean isOppo() {
         String b = (android.os.Build.BRAND + " " + android.os.Build.MANUFACTURER).toLowerCase(java.util.Locale.ROOT);

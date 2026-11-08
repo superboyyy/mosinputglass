@@ -301,8 +301,14 @@ public class SettingsActivity extends Activity {
         }
 
         // ---- 常用 ----
+        // 按系统隐藏不起作用的设置：HyperOS 液态玻璃的颜色、通透度、模糊由系统预设决定；
+        // 饱和度和折射、厚度、深度、色散只有荣耀的液态玻璃接口有（边缘高光是模块自己画的，都显示）
+        int kind = Config.glassKind();
+        boolean tintOn = kind != Config.GLASS_HYPER;
+        boolean honorGlass = kind == Config.GLASS_HONOR;
+
         LinearLayout common = section(page, "常用", null);
-        slider(common, "背景不透明度", Config.BG_ALPHA, 0, 1, 0.01f, "%");
+        if (tintOn) slider(common, "背景不透明度", Config.BG_ALPHA, 0, 1, 0.01f, "%");
         slider(common, "键盘圆角", Config.RADIUS, 0, 40, 1, "dp");
         slider(common, "按键圆角", Config.KEY_RADIUS, 0, 16, 0.5f, "dp");
         toggle(common, "iOS 按键配色", "按键同色、无描边无阴影", Config.KEY_STYLE, "ios", "wechat", false);
@@ -338,11 +344,13 @@ public class SettingsActivity extends Activity {
             chev.animate().rotation(open ? 90 : 0).setDuration(150).start();
         });
 
-        LinearLayout bg = section(adv, "背景", "底色的不透明度由「背景不透明度」控制，这里只填 RGB。");
-        slider(bg, "模糊强度", Config.BLUR, 0, 120, 1, "");
-        slider(bg, "饱和度", Config.SAT, 0.5f, 2f, 0.05f, "x");
-        colorRow(bg, "浅色底色", Config.BG_LIGHT);
-        colorRow(bg, "深色底色", Config.BG_DARK);
+        LinearLayout bg = section(adv, "背景", tintOn ? "底色的不透明度由「背景不透明度」控制，这里只填 RGB。" : null);
+        if (tintOn) slider(bg, "模糊强度", Config.BLUR, 0, 120, 1, "");
+        if (honorGlass) slider(bg, "饱和度", Config.SAT, 0.5f, 2f, 0.05f, "x");
+        if (tintOn) {
+            colorRow(bg, "浅色底色", Config.BG_LIGHT);
+            colorRow(bg, "深色底色", Config.BG_DARK);
+        }
         toggle(bg, "去掉输入法自带底板", null, Config.SKIP, "1", "0", false);
 
         LinearLayout keys = section(adv, "按键", null);
@@ -359,10 +367,12 @@ public class SettingsActivity extends Activity {
         if (!hasDoubao) dim(dbDy);
 
         LinearLayout glass = section(adv, "玻璃质感", null);
-        slider(glass, "折射", Config.REFRACTION, 0, 1, 0.01f, "");
-        slider(glass, "厚度", Config.THICKNESS, 0, 1, 0.01f, "");
-        slider(glass, "深度", Config.DEPTH, 0, 1, 0.01f, "");
-        slider(glass, "色散", Config.DISPERSION, 0, 1, 0.01f, "");
+        if (honorGlass) {
+            slider(glass, "折射", Config.REFRACTION, 0, 1, 0.01f, "");
+            slider(glass, "厚度", Config.THICKNESS, 0, 1, 0.01f, "");
+            slider(glass, "深度", Config.DEPTH, 0, 1, 0.01f, "");
+            slider(glass, "色散", Config.DISPERSION, 0, 1, 0.01f, "");
+        }
         toggle(glass, "边缘高光", null, Config.EDGE, "1", "0", false);
 
         // 「桌面搜索里铺满」只对荣耀的桌面搜索（com.hihonor.search）有效，没装它的手机（如小米）不显示
