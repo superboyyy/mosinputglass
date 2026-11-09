@@ -1881,16 +1881,32 @@ public class Main extends XposedModule {
             Object br = gt.getField("blurRadius").get(token);
             int small = br.getClass().getField("smallBlurRadius").getInt(br);
             int big = br.getClass().getField("bigBlurRadius").getInt(br);
+            boolean pass = false;
             if (!prop("hpass", "1").equals("0")) {
                 // 系统只给白名单里的应用开「把窗口背后的画面传给视图」（玻璃要靠它才有东西可折射）。
-                // 白名单检查在本进程的 ViewRootImpl 里，只在输入法自己的进程里关掉这个过滤
+                // 白名单检查在本进程的 ViewRootImpl 里，只在输入法自己的进程里关掉这个过滤。
+                // 有的机型默认开着过滤（persist.sys.enabled_passwindow_blur_filter），而且每新建一个 ViewRootImpl 都会重新打开，
+                // 所以每次开透传之前都关一次
                 try {
                     java.lang.reflect.Field ff = Class.forName("android.view.ViewRootImpl").getDeclaredField("sIsEnabledPassWindowBlurFilter");
                     ff.setAccessible(true);
                     ff.setBoolean(null, false);
                 } catch (Throwable t) { log("pass filter: " + t); }
                 Object ok = View.class.getMethod("setPassWindowBlurEnabled", boolean.class).invoke(v, true);
-                log("hyper pass window blur -> " + ok);
+                // 已经开过时 set 也返回 false，所以以视图上的状态为准
+                try {
+                    pass = Boolean.TRUE.equals(View.class.getMethod("getPassWindowBlurEnabled").invoke(v));
+                } catch (Throwable t) {
+                    pass = Boolean.TRUE.equals(ok);
+                }
+                log("hyper pass window blur -> " + ok + " enabled=" + pass);
+            }
+            // 透传没开成（不在白名单、机型不支持 MiBlur、还没挂到窗口上）：玻璃拿不到背后的画面，只能折射一片黑，
+            // 浅色模式下整块键盘变成深灰。退回普通的系统模糊
+            if (!pass) {
+                log("hyper glass needs pass window blur; fall back to plain blur");
+                hyperGlassOn = false;
+                return false;
             }
             View.class.getMethod("setMiBackgroundBlurMode", int.class).invoke(v, 1);
             int btype = Math.round(f("hbtype", -1f));
